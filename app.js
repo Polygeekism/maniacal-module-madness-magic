@@ -1,8 +1,20 @@
-console.log('Server is running');
 
-var randomNumber = require('./randomNumber.js');
+var express = require('express');
 
-var convertToDollars = require('./convertToDollars.js')
+var moduleThree = require('./moduleThree.js');
 
-console.log(randomNumber(100,1000000));
-console.log(convertToDollars(432.1545678));
+var app = express();
+var port = 3000;
+
+app.use(express.static('public'));
+
+
+//on /module madness return results from moduleThree
+app.get('/moduleMadness', function(req, res){
+    res.send(moduleThree());
+});
+
+app.listen(port, function () {
+    console.log('app is listening on', port);
+});
+//console.log(moduleThree);
